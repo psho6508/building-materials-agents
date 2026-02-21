@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Output (generated at runtime)
+building_materials_agents/output/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Claude Code session files
+.claude/
+CLAUDE_CODE_GIT_BASH_PATH.git.txt

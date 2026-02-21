@@ -1,0 +1,116 @@
+[
+  {
+    "id": "FX001",
+    "site_name": "삼성동 오피스빌딩",
+    "site_address": "서울 강남구 삼성동 234-56",
+    "inspection_date": "2026-02-17",
+    "inspector": "한정우",
+    "building_type": "업무시설",
+    "building_age_years": 12,
+    "items": [
+      {
+        "category": "배관",
+        "item": "급수배관 노후",
+        "condition": "교체필요",
+        "urgency": "긴급",
+        "estimated_materials": ["동파이프 15A", "밸브류", "배관 이음쇠"],
+        "estimated_cost": 4500000,
+        "notes": "누수 발생 구간 3곳. 즉시 교체 권장."
+      },
+      {
+        "category": "조명",
+        "item": "사무실 조명 교체",
+        "condition": "교체권장",
+        "urgency": "보통",
+        "estimated_materials": ["LED 평판조명 50W"],
+        "estimated_cost": 3200000,
+        "notes": "기존 형광등 → LED 교체로 에너지 절감 가능."
+      },
+      {
+        "category": "방수",
+        "item": "옥상 방수층 손상",
+        "condition": "보수필요",
+        "urgency": "보통",
+        "estimated_materials": ["방수시트 1.5mm", "실란트"],
+        "estimated_cost": 2800000,
+        "notes": "부분 보수로 대응 가능. 우기 전 완료 필요."
+      }
+    ],
+    "total_estimated_cost": 10500000,
+    "contact_person": "빌딩관리 이상혁 팀장",
+    "contact_phone": "010-8901-2345"
+  },
+  {
+    "id": "FX002",
+    "site_name": "역삼동 근린생활시설",
+    "site_address": "서울 강남구 역삼동 567-89",
+    "inspection_date": "2026-02-18",
+    "inspector": "김도영",
+    "building_type": "근린생활시설",
+    "building_age_years": 8,
+    "items": [
+      {
+        "category": "도장",
+        "item": "외벽 도장 열화",
+        "condition": "재도장필요",
+        "urgency": "보통",
+        "estimated_materials": ["외부용 탄성코트 18L", "프라이머"],
+        "estimated_cost": 5500000,
+        "notes": "남측 외벽 색바램 심함. 미관 개선 필요."
+      },
+      {
+        "category": "설비",
+        "item": "보일러 배관 점검",
+        "condition": "양호",
+        "urgency": "낮음",
+        "estimated_materials": [],
+        "estimated_cost": 0,
+        "notes": "현재 상태 양호. 다음 시즌 재점검."
+      }
+    ],
+    "total_estimated_cost": 5500000,
+    "contact_person": "건물주 오재현",
+    "contact_phone": "010-6789-0123"
+  },
+  {
+    "id": "FX003",
+    "site_name": "잠실 아파트 단지 관리동",
+    "site_address": "서울 송파구 잠실동 890-12",
+    "inspection_date": "2026-02-16",
+    "inspector": "한정우",
+    "building_type": "공동주택 관리동",
+    "building_age_years": 20,
+    "items": [
+      {
+        "category": "배관",
+        "item": "난방배관 노후",
+        "condition": "교체필요",
+        "urgency": "긴급",
+        "estimated_materials": ["PVC파이프 50mm", "배관 이음쇠", "보온재"],
+        "estimated_cost": 6000000,
+        "notes": "동파 위험 구간. 보온재 보강 필수."
+      },
+      {
+        "category": "전기",
+        "item": "분전반 교체",
+        "condition": "교체필요",
+        "urgency": "긴급",
+        "estimated_materials": ["분전반 20회로", "차단기"],
+        "estimated_cost": 2500000,
+        "notes": "노후 분전반. 안전사고 위험."
+      },
+      {
+        "category": "소방",
+        "item": "소화기 교체",
+        "condition": "교체필요",
+        "urgency": "보통",
+        "estimated_materials": ["ABC 소화기 3.3kg"],
+        "estimated_cost": 800000,
+        "notes": "유효기간 만료 소화기 15개."
+      }
+    ],
+    "total_estimated_cost": 9300000,
+    "contact_person": "관리소장 윤병철",
+    "contact_phone": "010-7890-1234"
+  }
+]
