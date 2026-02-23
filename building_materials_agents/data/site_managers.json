@@ -12,12 +12,17 @@
     "estimated_next_phase_date": "2026-02-28",
     "preferred_brands": ["동국제강 철근", "쌍용 시멘트", "LG하우시스"],
     "order_history": [
-      {"date": "2026-01-10", "item": "철근 SD400 D16", "qty": "50톤", "amount": 45000000},
-      {"date": "2026-01-25", "item": "레미콘 25-21-15", "qty": "200㎥", "amount": 28000000}
+      {"date": "2026-01-10", "item": "철근 SD400 D16", "qty": "50톤", "amount": 45000000, "cost": 40000000, "profit": 5000000, "margin_pct": 11.1},
+      {"date": "2026-01-25", "item": "레미콘 25-21-15", "qty": "200㎥", "amount": 28000000, "cost": 22400000, "profit": 5600000, "margin_pct": 20.0}
     ],
     "relationship_score": 9,
     "last_contact": "2026-02-15",
-    "notes": "신뢰 두터움. 자재 품질 중시. 납기 엄수 필수."
+    "notes": "신뢰 두터움. 자재 품질 중시. 납기 엄수 필수.",
+    "customer_lifetime_value": 185000000,
+    "avg_margin_pct": 22.5,
+    "avg_order_value": 36500000,
+    "order_frequency_days": 15,
+    "payment_reliability": "A"
   },
   {
     "id": "SM002",
@@ -32,12 +37,17 @@
     "estimated_next_phase_date": "2026-03-15",
     "preferred_brands": ["KCC", "한일시멘트", "노루표 페인트"],
     "order_history": [
-      {"date": "2026-02-01", "item": "석고보드 9.5mm", "qty": "3000매", "amount": 12000000},
-      {"date": "2026-02-10", "item": "타일 600x600", "qty": "500박스", "amount": 15000000}
+      {"date": "2026-02-01", "item": "석고보드 9.5mm", "qty": "3000매", "amount": 12000000, "cost": 9600000, "profit": 2400000, "margin_pct": 20.0},
+      {"date": "2026-02-10", "item": "타일 600x600", "qty": "500박스", "amount": 15000000, "cost": 12750000, "profit": 2250000, "margin_pct": 15.0}
     ],
     "relationship_score": 7,
     "last_contact": "2026-02-10",
-    "notes": "가격 민감. 경쟁사 견적과 비교하는 편. 빠른 응대 중요."
+    "notes": "가격 민감. 경쟁사 견적과 비교하는 편. 빠른 응대 중요.",
+    "customer_lifetime_value": 95000000,
+    "avg_margin_pct": 17.5,
+    "avg_order_value": 13500000,
+    "order_frequency_days": 20,
+    "payment_reliability": "B"
   },
   {
     "id": "SM003",
@@ -52,11 +62,16 @@
     "estimated_next_phase_date": "2026-03-05",
     "preferred_brands": ["동국제강", "아세아시멘트"],
     "order_history": [
-      {"date": "2026-02-05", "item": "시멘트 포대 40kg", "qty": "500포", "amount": 3500000}
+      {"date": "2026-02-05", "item": "시멘트 포대 40kg", "qty": "500포", "amount": 3500000, "cost": 2900000, "profit": 600000, "margin_pct": 17.1}
     ],
     "relationship_score": 6,
     "last_contact": "2026-02-05",
-    "notes": "신규 거래처. 관계 구축 중. 첫 대량 발주 유도 필요."
+    "notes": "신규 거래처. 관계 구축 중. 첫 대량 발주 유도 필요.",
+    "customer_lifetime_value": 35000000,
+    "avg_margin_pct": 17.1,
+    "avg_order_value": 3500000,
+    "order_frequency_days": 30,
+    "payment_reliability": "B"
   },
   {
     "id": "SM004",
@@ -71,12 +86,17 @@
     "estimated_next_phase_date": "2026-04-01",
     "preferred_brands": ["린나이 보일러", "대림바스"],
     "order_history": [
-      {"date": "2026-01-20", "item": "보일러 배관세트", "qty": "30세트", "amount": 9000000},
-      {"date": "2026-02-12", "item": "위생도기 세트", "qty": "30세트", "amount": 18000000}
+      {"date": "2026-01-20", "item": "보일러 배관세트", "qty": "30세트", "amount": 9000000, "cost": 6750000, "profit": 2250000, "margin_pct": 25.0},
+      {"date": "2026-02-12", "item": "위생도기 세트", "qty": "30세트", "amount": 18000000, "cost": 12600000, "profit": 5400000, "margin_pct": 30.0}
     ],
     "relationship_score": 8,
     "last_contact": "2026-02-12",
-    "notes": "리모델링 전문. 고급 자재 선호. 마감재 발주 예정."
+    "notes": "리모델링 전문. 고급 자재 선호. 마감재 발주 예정.",
+    "customer_lifetime_value": 142000000,
+    "avg_margin_pct": 27.5,
+    "avg_order_value": 13500000,
+    "order_frequency_days": 18,
+    "payment_reliability": "A"
   },
   {
     "id": "SM005",
@@ -91,11 +111,16 @@
     "estimated_next_phase_date": "2026-03-10",
     "preferred_brands": ["LG하우시스 창호", "KCC 단열재"],
     "order_history": [
-      {"date": "2026-02-08", "item": "시스템창호 세트", "qty": "45세트", "amount": 31500000},
-      {"date": "2026-02-14", "item": "외단열재 100mm", "qty": "200매", "amount": 8000000}
+      {"date": "2026-02-08", "item": "시스템창호 세트", "qty": "45세트", "amount": 31500000, "cost": 23400000, "profit": 8100000, "margin_pct": 25.7},
+      {"date": "2026-02-14", "item": "외단열재 100mm", "qty": "200매", "amount": 8000000, "cost": 6400000, "profit": 1600000, "margin_pct": 20.0}
     ],
     "relationship_score": 8,
     "last_contact": "2026-02-14",
-    "notes": "고급 주택 전문. 단가보다 품질 우선. 내장재 추천 요청 예정."
+    "notes": "고급 주택 전문. 단가보다 품질 우선. 내장재 추천 요청 예정.",
+    "customer_lifetime_value": 168000000,
+    "avg_margin_pct": 24.3,
+    "avg_order_value": 19750000,
+    "order_frequency_days": 12,
+    "payment_reliability": "A"
   }
 ]

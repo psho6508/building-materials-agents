@@ -11,7 +11,13 @@
     "lead_time_days": 3,
     "min_order_qty": 5,
     "stock_status": "충분",
-    "notes": "가격 급등 추세"
+    "notes": "가격 급등 추세",
+    "cost_price": 780000,
+    "selling_price": 950000,
+    "margin_pct": 17.9,
+    "inventory_qty": 45,
+    "reorder_point": 15,
+    "bundle_candidates": ["P002", "P003"]
   },
   {
     "id": "P002",
@@ -25,7 +31,13 @@
     "lead_time_days": 3,
     "min_order_qty": 5,
     "stock_status": "충분",
-    "notes": "가격 급등 추세"
+    "notes": "가격 급등 추세",
+    "cost_price": 800000,
+    "selling_price": 980000,
+    "margin_pct": 18.4,
+    "inventory_qty": 38,
+    "reorder_point": 15,
+    "bundle_candidates": ["P001", "P003"]
   },
   {
     "id": "P003",
@@ -39,7 +51,13 @@
     "lead_time_days": 1,
     "min_order_qty": 100,
     "stock_status": "충분",
-    "notes": "가격 안정세"
+    "notes": "가격 안정세",
+    "cost_price": 5800,
+    "selling_price": 7500,
+    "margin_pct": 22.7,
+    "inventory_qty": 800,
+    "reorder_point": 200,
+    "bundle_candidates": ["P001", "P002"]
   },
   {
     "id": "P004",
@@ -53,7 +71,13 @@
     "lead_time_days": 2,
     "min_order_qty": 50,
     "stock_status": "보통",
-    "notes": "원자재 가격 상승 영향"
+    "notes": "원자재 가격 상승 영향",
+    "cost_price": 7200,
+    "selling_price": 9500,
+    "margin_pct": 24.2,
+    "inventory_qty": 150,
+    "reorder_point": 50,
+    "bundle_candidates": ["P005", "P011"]
   },
   {
     "id": "P005",
@@ -67,7 +91,13 @@
     "lead_time_days": 5,
     "min_order_qty": 20,
     "stock_status": "부족",
-    "notes": "구리 국제가 급등. 조기 매입 권장."
+    "notes": "구리 국제가 급등. 조기 매입 권장.",
+    "cost_price": 28000,
+    "selling_price": 38000,
+    "margin_pct": 26.3,
+    "inventory_qty": 12,
+    "reorder_point": 20,
+    "bundle_candidates": ["P004", "P011"]
   },
   {
     "id": "P006",
@@ -81,7 +111,13 @@
     "lead_time_days": 2,
     "min_order_qty": 10,
     "stock_status": "충분",
-    "notes": "소폭 하락세"
+    "notes": "소폭 하락세",
+    "cost_price": 95000,
+    "selling_price": 128000,
+    "margin_pct": 25.8,
+    "inventory_qty": 60,
+    "reorder_point": 15,
+    "bundle_candidates": ["P003", "P008"]
   },
   {
     "id": "P007",
@@ -95,7 +131,13 @@
     "lead_time_days": 1,
     "min_order_qty": 100,
     "stock_status": "충분",
-    "notes": "가격 변동 없음"
+    "notes": "가격 변동 없음",
+    "cost_price": 3200,
+    "selling_price": 4800,
+    "margin_pct": 33.3,
+    "inventory_qty": 500,
+    "reorder_point": 150,
+    "bundle_candidates": ["P009", "P010"]
   },
   {
     "id": "P008",
@@ -109,7 +151,13 @@
     "lead_time_days": 3,
     "min_order_qty": 50,
     "stock_status": "보통",
-    "notes": "원유가 연동 소폭 상승"
+    "notes": "원유가 연동 소폭 상승",
+    "cost_price": 32000,
+    "selling_price": 43000,
+    "margin_pct": 25.6,
+    "inventory_qty": 80,
+    "reorder_point": 30,
+    "bundle_candidates": ["P006", "P012"]
   },
   {
     "id": "P009",
@@ -123,7 +171,13 @@
     "lead_time_days": 1,
     "min_order_qty": 10,
     "stock_status": "충분",
-    "notes": "할인 프로모션 진행 중"
+    "notes": "할인 프로모션 진행 중",
+    "cost_price": 48000,
+    "selling_price": 72000,
+    "margin_pct": 33.3,
+    "inventory_qty": 120,
+    "reorder_point": 30,
+    "bundle_candidates": ["P007", "P010"]
   },
   {
     "id": "P010",
@@ -137,7 +191,13 @@
     "lead_time_days": 2,
     "min_order_qty": 20,
     "stock_status": "충분",
-    "notes": "재고 소진 할인"
+    "notes": "재고 소진 할인",
+    "cost_price": 28000,
+    "selling_price": 48000,
+    "margin_pct": 41.7,
+    "inventory_qty": 200,
+    "reorder_point": 40,
+    "bundle_candidates": ["P007", "P009"]
   },
   {
     "id": "P011",
@@ -151,7 +211,13 @@
     "lead_time_days": 5,
     "min_order_qty": 5,
     "stock_status": "보통",
-    "notes": "안정 가격"
+    "notes": "안정 가격",
+    "cost_price": 250000,
+    "selling_price": 380000,
+    "margin_pct": 34.2,
+    "inventory_qty": 25,
+    "reorder_point": 10,
+    "bundle_candidates": ["P004", "P005"]
   },
   {
     "id": "P012",
@@ -165,6 +231,12 @@
     "lead_time_days": 7,
     "min_order_qty": 10,
     "stock_status": "주문제작",
-    "notes": "리드타임 주의"
+    "notes": "리드타임 주의",
+    "cost_price": 520000,
+    "selling_price": 750000,
+    "margin_pct": 30.7,
+    "inventory_qty": 0,
+    "reorder_point": 5,
+    "bundle_candidates": ["P008", "P007"]
   }
 ]

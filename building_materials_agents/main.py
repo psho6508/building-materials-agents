@@ -33,15 +33,21 @@ os.environ.pop("CLAUDECODE", None)
 # 프로젝트 루트를 sys.path에 추가
 sys.path.insert(0, str(Path(__file__).parent))
 
+# SDK monkey-patch 적용
+from sdk_patch import apply_sdk_patches
+apply_sdk_patches()
+
 import anyio
 
 from orchestrator import DailyStrategyOrchestrator, run_single_agent
 
 
 AGENT_DESCRIPTIONS = {
+    "market_scan": "시장 스캔 - 서울/경기 착공·입찰 감시 (4대 자재 카테고리)",
     "bid_monitor": "입찰/착공 감시 - 나라장터·세움터 공고 모니터링",
+    "price_strategy": "시세 전략 - 4대 카테고리 시세 분석·마진 잠식·DO/HOLD/SKIP 판단",
     "price_tracker": "시세 추적 - 철강·시멘트·배관자재 시세 분석",
-    "site_manager_crm": "소장 CRM - 현장소장 네트워크 관리·선제 제안",
+    "site_manager_crm": "소장 CRM - 563명 실데이터 기반 착공 매칭·기존고객/신규개척 판단",
     "fixman_synergy": "픽스맨 연동 - 점검 데이터 기반 패키지 제안",
     "content_strategy": "콘텐츠 전략 - 건자재TV 매출 연결 기획",
 }

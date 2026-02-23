@@ -7,6 +7,9 @@
     "inspector": "한정우",
     "building_type": "업무시설",
     "building_age_years": 12,
+    "conversion_probability": 0.85,
+    "decision_maker_authority": "빌딩관리 팀장 - 500만원 이하 자체결재, 이상 본부장 승인",
+    "follow_up_deadline": "2026-02-24",
     "items": [
       {
         "category": "배관",
@@ -15,7 +18,16 @@
         "urgency": "긴급",
         "estimated_materials": ["동파이프 15A", "밸브류", "배관 이음쇠"],
         "estimated_cost": 4500000,
-        "notes": "누수 발생 구간 3곳. 즉시 교체 권장."
+        "notes": "누수 발생 구간 3곳. 즉시 교체 권장.",
+        "material_quantities": [
+          {"product_id": "P005", "name": "동파이프 15A 5.5m", "qty": 80, "unit_price": 38000},
+          {"product_id": null, "name": "밸브류", "qty": 15, "unit_price": 25000},
+          {"product_id": null, "name": "배관 이음쇠", "qty": 60, "unit_price": 5000}
+        ],
+        "total_material_cost": 3715000,
+        "total_selling_price": 4500000,
+        "profit_opportunity": 785000,
+        "margin_pct": 17.4
       },
       {
         "category": "조명",
@@ -24,7 +36,14 @@
         "urgency": "보통",
         "estimated_materials": ["LED 평판조명 50W"],
         "estimated_cost": 3200000,
-        "notes": "기존 형광등 → LED 교체로 에너지 절감 가능."
+        "notes": "기존 형광등 → LED 교체로 에너지 절감 가능.",
+        "material_quantities": [
+          {"product_id": "P010", "name": "LED 평판조명 50W", "qty": 60, "unit_price": 48000}
+        ],
+        "total_material_cost": 1680000,
+        "total_selling_price": 2880000,
+        "profit_opportunity": 1200000,
+        "margin_pct": 41.7
       },
       {
         "category": "방수",
@@ -33,7 +52,15 @@
         "urgency": "보통",
         "estimated_materials": ["방수시트 1.5mm", "실란트"],
         "estimated_cost": 2800000,
-        "notes": "부분 보수로 대응 가능. 우기 전 완료 필요."
+        "notes": "부분 보수로 대응 가능. 우기 전 완료 필요.",
+        "material_quantities": [
+          {"product_id": "P006", "name": "방수시트 1.5mm", "qty": 15, "unit_price": 128000},
+          {"product_id": null, "name": "실란트", "qty": 20, "unit_price": 15000}
+        ],
+        "total_material_cost": 1725000,
+        "total_selling_price": 2220000,
+        "profit_opportunity": 495000,
+        "margin_pct": 22.3
       }
     ],
     "total_estimated_cost": 10500000,
@@ -48,6 +75,9 @@
     "inspector": "김도영",
     "building_type": "근린생활시설",
     "building_age_years": 8,
+    "conversion_probability": 0.5,
+    "decision_maker_authority": "건물주 직접 결재 - 금액 무관 본인 결정",
+    "follow_up_deadline": "2026-03-04",
     "items": [
       {
         "category": "도장",
@@ -56,7 +86,15 @@
         "urgency": "보통",
         "estimated_materials": ["외부용 탄성코트 18L", "프라이머"],
         "estimated_cost": 5500000,
-        "notes": "남측 외벽 색바램 심함. 미관 개선 필요."
+        "notes": "남측 외벽 색바램 심함. 미관 개선 필요.",
+        "material_quantities": [
+          {"product_id": null, "name": "외부용 탄성코트 18L", "qty": 30, "unit_price": 95000},
+          {"product_id": null, "name": "프라이머", "qty": 15, "unit_price": 45000}
+        ],
+        "total_material_cost": 3525000,
+        "total_selling_price": 4500000,
+        "profit_opportunity": 975000,
+        "margin_pct": 21.7
       },
       {
         "category": "설비",
@@ -65,7 +103,12 @@
         "urgency": "낮음",
         "estimated_materials": [],
         "estimated_cost": 0,
-        "notes": "현재 상태 양호. 다음 시즌 재점검."
+        "notes": "현재 상태 양호. 다음 시즌 재점검.",
+        "material_quantities": [],
+        "total_material_cost": 0,
+        "total_selling_price": 0,
+        "profit_opportunity": 0,
+        "margin_pct": 0
       }
     ],
     "total_estimated_cost": 5500000,
@@ -80,6 +123,9 @@
     "inspector": "한정우",
     "building_type": "공동주택 관리동",
     "building_age_years": 20,
+    "conversion_probability": 0.75,
+    "decision_maker_authority": "관리소장 - 300만원 이하 자체결재, 이상 입주자대표회의 승인",
+    "follow_up_deadline": "2026-02-23",
     "items": [
       {
         "category": "배관",
@@ -88,7 +134,16 @@
         "urgency": "긴급",
         "estimated_materials": ["PVC파이프 50mm", "배관 이음쇠", "보온재"],
         "estimated_cost": 6000000,
-        "notes": "동파 위험 구간. 보온재 보강 필수."
+        "notes": "동파 위험 구간. 보온재 보강 필수.",
+        "material_quantities": [
+          {"product_id": "P004", "name": "PVC파이프 50mm 4m", "qty": 200, "unit_price": 9500},
+          {"product_id": null, "name": "배관 이음쇠", "qty": 100, "unit_price": 5000},
+          {"product_id": null, "name": "보온재", "qty": 200, "unit_price": 3500}
+        ],
+        "total_material_cost": 2800000,
+        "total_selling_price": 3600000,
+        "profit_opportunity": 800000,
+        "margin_pct": 22.2
       },
       {
         "category": "전기",
@@ -97,7 +152,15 @@
         "urgency": "긴급",
         "estimated_materials": ["분전반 20회로", "차단기"],
         "estimated_cost": 2500000,
-        "notes": "노후 분전반. 안전사고 위험."
+        "notes": "노후 분전반. 안전사고 위험.",
+        "material_quantities": [
+          {"product_id": null, "name": "분전반 20회로", "qty": 3, "unit_price": 450000},
+          {"product_id": null, "name": "차단기", "qty": 60, "unit_price": 15000}
+        ],
+        "total_material_cost": 2250000,
+        "total_selling_price": 2500000,
+        "profit_opportunity": 250000,
+        "margin_pct": 10.0
       },
       {
         "category": "소방",
@@ -106,7 +169,14 @@
         "urgency": "보통",
         "estimated_materials": ["ABC 소화기 3.3kg"],
         "estimated_cost": 800000,
-        "notes": "유효기간 만료 소화기 15개."
+        "notes": "유효기간 만료 소화기 15개.",
+        "material_quantities": [
+          {"product_id": null, "name": "ABC 소화기 3.3kg", "qty": 15, "unit_price": 35000}
+        ],
+        "total_material_cost": 525000,
+        "total_selling_price": 680000,
+        "profit_opportunity": 155000,
+        "margin_pct": 22.8
       }
     ],
     "total_estimated_cost": 9300000,
