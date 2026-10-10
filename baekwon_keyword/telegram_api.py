@@ -17,6 +17,13 @@ def _check_config():
         raise RuntimeError("TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID 가 설정되지 않았습니다.")
 
 
+def _raise_with_body(resp: requests.Response):
+    """실패 응답의 본문(에러 사유)을 로그로 남긴 뒤 예외를 던진다."""
+    if not resp.ok:
+        print(f"[텔레그램 API 오류] {resp.status_code}: {resp.text[:500]}")
+    resp.raise_for_status()
+
+
 def send_candidate_card(candidate_id: str, text: str) -> int | None:
     """후보 카드 1건을 인라인 버튼과 함께 발송하고 message_id를 반환한다."""
     _check_config()
@@ -34,7 +41,7 @@ def send_candidate_card(candidate_id: str, text: str) -> int | None:
         json={"chat_id": TELEGRAM_CHAT_ID, "text": text, "reply_markup": keyboard},
         timeout=20,
     )
-    resp.raise_for_status()
+    _raise_with_body(resp)
     result = resp.json()
     if result.get("ok"):
         return result["result"]["message_id"]
@@ -47,7 +54,7 @@ def send_text(text: str, reply_to_message_id: int | None = None):
     if reply_to_message_id:
         payload["reply_to_message_id"] = reply_to_message_id
     resp = requests.post(f"{API_BASE}/sendMessage", json=payload, timeout=20)
-    resp.raise_for_status()
+    _raise_with_body(resp)
 
 
 def send_long_text(text: str):
@@ -91,7 +98,7 @@ def get_updates(offset: int) -> list[dict]:
         params={"offset": offset, "timeout": 0},
         timeout=20,
     )
-    resp.raise_for_status()
+    _raise_with_body(resp)
     result = resp.json()
     if result.get("ok"):
         return result["result"]
