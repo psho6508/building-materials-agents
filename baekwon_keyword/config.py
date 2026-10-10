@@ -41,6 +41,7 @@ import pathlib
 ROOT_DIR = pathlib.Path(__file__).parent
 STATE_DIR = ROOT_DIR / "state"
 DRAFTS_DIR = ROOT_DIR / "drafts"
+KEYWORD_STORAGE_DIR = ROOT_DIR / "keyword_storage"
 PENDING_PATH = STATE_DIR / "pending_candidates.json"
 OFFSET_PATH = STATE_DIR / "telegram_offset.json"
 SEEN_PATH = STATE_DIR / "seen_keywords.json"

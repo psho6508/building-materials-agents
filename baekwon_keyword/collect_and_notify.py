@@ -5,6 +5,7 @@ GitHub Actions 워크플로우(baekwon-keyword-collect.yml)에서 호출된다.
 
 from datetime import datetime, timezone, timedelta
 
+import keyword_storage
 import relevance
 import sources
 import state
@@ -78,6 +79,9 @@ def main():
     # 2) 관련성 필터링 (시간당 최대 MAX_CANDIDATES_PER_RUN건, 적합한 게 없으면 스킵)
     candidates = relevance.filter_candidates(raw_items)[:MAX_CANDIDATES_PER_RUN]
     print(f"관련성 필터 통과: {len(candidates)}개")
+
+    # 3) 통과한 키워드는 승인 여부와 무관하게 일별로 누적 저장
+    keyword_storage.append_candidates(now.strftime("%Y-%m-%d"), now.isoformat(), candidates)
 
     if not candidates:
         print("적합한 주제가 없어 후보 카드를 보내지 않습니다.")

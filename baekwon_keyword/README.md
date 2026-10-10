@@ -20,6 +20,8 @@
      연예인 이름이 포함된 키워드는 연결고리가 있어 보여도 항상 제외
    - 회차당 최대 2건까지만 후보 카드로 발송 (📝 블로그 발행 / 🎬 영상 제작 / ❌ 거절
      버튼). 적합한 주제가 없으면 후보 카드는 보내지 않습니다.
+   - 관련성 필터를 통과한 키워드는 승인 여부와 무관하게 `keyword_storage/{YYYY-MM-DD}.json`에
+     일별로 누적 저장됩니다 (하루 4회 수집분이 같은 날짜 파일에 쌓임).
 2. **승인 처리** (`check_approvals.py`, 10분 간격 폴링)
    - 버튼 클릭을 감지해 블로그 초안(2000~3000자, 네이버 SEO 구조) 또는 영상 대본
      (30~60초 숏폼)을 생성
@@ -59,4 +61,5 @@ python collect_and_notify.py
 - `content_draft.py` — 블로그/영상 대본 초안 생성
 - `telegram_api.py` — 텔레그램 발송/수신
 - `state.py` — 상태 저장(`state/pending_candidates.json`, `state/telegram_offset.json`)
+- `keyword_storage.py` — 관련 키워드 일별 누적 저장 (`keyword_storage/{날짜}.json`)
 - `drafts/` — 승인된 초안 (blog/, video/)
