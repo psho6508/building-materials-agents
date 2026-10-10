@@ -45,7 +45,7 @@ gh secret set TELEGRAM_CHAT_ID
 ## 로컬 테스트
 
 ```bash
-cd baekwon-keyword-bot
+cd baekwon_keyword
 pip install -r requirements.txt
 cp .env.example .env  # 값 채우기
 python -c "import os,dotenv" 2>/dev/null || pip install python-dotenv

@@ -20,7 +20,7 @@ def _draft_url(action: str, filename: str) -> str:
     subdir = "blog" if action == "blog" else "video"
     return (
         f"https://github.com/{GITHUB_REPOSITORY}/blob/{GITHUB_BRANCH}/"
-        f"baekwon-keyword-bot/drafts/{subdir}/{filename}"
+        f"baekwon_keyword/drafts/{subdir}/{filename}"
     )
 
 
