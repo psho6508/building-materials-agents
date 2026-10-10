@@ -1,10 +1,15 @@
-"""텔레그램 봇 API 래퍼 — 후보 카드 발송 + 버튼 콜백 수신."""
+"""텔레그램 봇 API 래퍼 — 후보 카드 발송 + 버튼 콜백 수신.
+
+키워드/Claude 생성 텍스트에는 <, >, & 등이 섞일 수 있어 parse_mode를 쓰지 않고
+항상 평문으로 보낸다 (HTML 파싱 오류로 발송이 실패하는 것을 방지).
+"""
 
 import requests
 
 from config import TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
 
 API_BASE = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}"
+TG_LIMIT = 3800  # 텔레그램 메시지 최대 4096자 → 여유 두고 분할
 
 
 def _check_config():
@@ -26,12 +31,7 @@ def send_candidate_card(candidate_id: str, text: str) -> int | None:
     }
     resp = requests.post(
         f"{API_BASE}/sendMessage",
-        json={
-            "chat_id": TELEGRAM_CHAT_ID,
-            "text": text,
-            "reply_markup": keyboard,
-            "parse_mode": "HTML",
-        },
+        json={"chat_id": TELEGRAM_CHAT_ID, "text": text, "reply_markup": keyboard},
         timeout=20,
     )
     resp.raise_for_status()
@@ -43,21 +43,30 @@ def send_candidate_card(candidate_id: str, text: str) -> int | None:
 
 def send_text(text: str, reply_to_message_id: int | None = None):
     _check_config()
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "HTML"}
+    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": text}
     if reply_to_message_id:
         payload["reply_to_message_id"] = reply_to_message_id
     resp = requests.post(f"{API_BASE}/sendMessage", json=payload, timeout=20)
     resp.raise_for_status()
 
 
+def send_long_text(text: str):
+    """4096자 제한을 넘는 긴 텍스트를 줄 단위로 나눠 여러 메시지로 발송한다."""
+    chunks, cur = [], ""
+    for line in text.split("\n"):
+        if len(cur) + len(line) + 1 > TG_LIMIT:
+            chunks.append(cur)
+            cur = ""
+        cur += line + "\n"
+    if cur.strip():
+        chunks.append(cur)
+    for c in chunks:
+        send_text(c)
+
+
 def edit_message(message_id: int, text: str, remove_keyboard: bool = True):
     _check_config()
-    payload = {
-        "chat_id": TELEGRAM_CHAT_ID,
-        "message_id": message_id,
-        "text": text,
-        "parse_mode": "HTML",
-    }
+    payload = {"chat_id": TELEGRAM_CHAT_ID, "message_id": message_id, "text": text}
     if remove_keyboard:
         payload["reply_markup"] = {"inline_keyboard": []}
     resp = requests.post(f"{API_BASE}/editMessageText", json=payload, timeout=20)

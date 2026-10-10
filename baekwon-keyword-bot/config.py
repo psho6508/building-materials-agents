@@ -43,9 +43,10 @@ STATE_DIR = ROOT_DIR / "state"
 DRAFTS_DIR = ROOT_DIR / "drafts"
 PENDING_PATH = STATE_DIR / "pending_candidates.json"
 OFFSET_PATH = STATE_DIR / "telegram_offset.json"
+SEEN_PATH = STATE_DIR / "seen_keywords.json"
 
-# 후보 카드 최대 발송 개수 (텔레그램 스팸 방지)
-MAX_CANDIDATES_PER_RUN = 6
+# 후보 카드 최대 발송 개수 (수집 1회당, "시간당 최대 2건" 기준)
+MAX_CANDIDATES_PER_RUN = 2
 
 # GitHub 저장소 (초안 URL 생성용)
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "psho6508/building-materials-agents")
