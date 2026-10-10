@@ -4,6 +4,7 @@ __pycache__/
 *.pyo
 .venv/
 venv/
+.env
 
 # Output (generated at runtime)
 building_materials_agents/output/
