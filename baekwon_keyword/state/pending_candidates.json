@@ -54,6 +54,18 @@
       "video_script_url": "https://github.com/psho6508/building-materials-agents/blob/master/baekwon_keyword/drafts/video/2026-10-11-ca0a2006b3.md",
       "video_message_id": 14,
       "video_status": "script_ready"
+    },
+    "7558d72747": {
+      "id": "7558d72747",
+      "topic": "사당 댄스연습실 모티스 래치볼트 고장 수리 후기",
+      "source": "manual_test",
+      "rank": 0,
+      "reason": "수동 테스트용으로 강제 생성된 후보입니다.",
+      "angle": "버튼 동작(글 발행/숏폼 제작/둘 다/넘김) 확인용.",
+      "suggested_action": "both",
+      "status": "pending",
+      "message_id": 15,
+      "created_at": "2026-10-11T18:05:40.623550+09:00"
     }
   }
 }
