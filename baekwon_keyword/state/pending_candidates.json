@@ -11,6 +11,18 @@
       "status": "pending",
       "message_id": 8,
       "created_at": "2026-10-11T09:33:47.292672+09:00"
+    },
+    "3613afc1af": {
+      "id": "3613afc1af",
+      "topic": "수전에서 물이 똑똑 떨어져요",
+      "source": "manual_test",
+      "rank": 0,
+      "reason": "수동 테스트용으로 강제 생성된 후보입니다.",
+      "angle": "버튼 동작(글 발행/숏폼 제작/둘 다/넘김) 확인용.",
+      "suggested_action": "both",
+      "status": "pending",
+      "message_id": 10,
+      "created_at": "2026-10-11T10:12:30.524347+09:00"
     }
   }
 }
