@@ -24,9 +24,22 @@ def _raise_with_body(resp: requests.Response):
     resp.raise_for_status()
 
 
+def _send_with_keyboard(text: str, keyboard: dict) -> int | None:
+    _check_config()
+    resp = requests.post(
+        f"{API_BASE}/sendMessage",
+        json={"chat_id": TELEGRAM_CHAT_ID, "text": text, "reply_markup": keyboard},
+        timeout=20,
+    )
+    _raise_with_body(resp)
+    result = resp.json()
+    if result.get("ok"):
+        return result["result"]["message_id"]
+    return None
+
+
 def send_candidate_card(candidate_id: str, text: str) -> int | None:
     """후보 카드 1건을 인라인 버튼과 함께 발송하고 message_id를 반환한다."""
-    _check_config()
     keyboard = {
         "inline_keyboard": [
             [
@@ -39,16 +52,20 @@ def send_candidate_card(candidate_id: str, text: str) -> int | None:
             ],
         ]
     }
-    resp = requests.post(
-        f"{API_BASE}/sendMessage",
-        json={"chat_id": TELEGRAM_CHAT_ID, "text": text, "reply_markup": keyboard},
-        timeout=20,
-    )
-    _raise_with_body(resp)
-    result = resp.json()
-    if result.get("ok"):
-        return result["result"]["message_id"]
-    return None
+    return _send_with_keyboard(text, keyboard)
+
+
+def send_video_review_card(candidate_id: str, text: str) -> int | None:
+    """영상 대본 승인 카드를 인라인 버튼과 함께 발송하고 message_id를 반환한다."""
+    keyboard = {
+        "inline_keyboard": [
+            [
+                {"text": "🎬 영상 만들기", "callback_data": f"mkvid:{candidate_id}"},
+                {"text": "❌ 취소", "callback_data": f"cancelvid:{candidate_id}"},
+            ]
+        ]
+    }
+    return _send_with_keyboard(text, keyboard)
 
 
 def send_text(text: str, reply_to_message_id: int | None = None):
@@ -74,10 +91,14 @@ def send_long_text(text: str):
         send_text(c)
 
 
-def edit_message(message_id: int, text: str, remove_keyboard: bool = True):
+def edit_message(
+    message_id: int, text: str, remove_keyboard: bool = True, keyboard: dict | None = None
+):
     _check_config()
     payload = {"chat_id": TELEGRAM_CHAT_ID, "message_id": message_id, "text": text}
-    if remove_keyboard:
+    if keyboard is not None:
+        payload["reply_markup"] = keyboard
+    elif remove_keyboard:
         payload["reply_markup"] = {"inline_keyboard": []}
     resp = requests.post(f"{API_BASE}/editMessageText", json=payload, timeout=20)
     if not resp.ok:
