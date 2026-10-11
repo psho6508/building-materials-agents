@@ -86,6 +86,15 @@ def _send_candidates(candidates: list[dict], now: datetime) -> int:
 def main():
     now = datetime.now(KST)
 
+    # 임시: 다른 작업(OpenMontage 레퍼런스 분석 등)의 결과를 토큰 없이 텔레그램으로
+    # 보고하고 싶을 때 원문 그대로 발송하고 종료한다.
+    raw_message = os.environ.get("RAW_MESSAGE_TEXT", "").strip()
+    if raw_message:
+        print("[원문 전송 모드] 텔레그램으로 그대로 발송")
+        telegram_api.send_long_text(raw_message)
+        print("전송 완료")
+        return
+
     # 테스트용: 실제 트렌드를 기다리지 않고 버튼 승인 흐름만 바로 확인하고 싶을 때.
     test_topic = os.environ.get("TEST_CANDIDATE_TOPIC", "").strip()
     if test_topic:
