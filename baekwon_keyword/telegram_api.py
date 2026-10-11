@@ -30,10 +30,13 @@ def send_candidate_card(candidate_id: str, text: str) -> int | None:
     keyboard = {
         "inline_keyboard": [
             [
-                {"text": "📝 블로그 발행", "callback_data": f"blog:{candidate_id}"},
-                {"text": "🎬 영상 제작", "callback_data": f"video:{candidate_id}"},
-                {"text": "❌ 거절", "callback_data": f"reject:{candidate_id}"},
-            ]
+                {"text": "📝 글 발행", "callback_data": f"blog:{candidate_id}"},
+                {"text": "🎬 숏폼 제작", "callback_data": f"video:{candidate_id}"},
+            ],
+            [
+                {"text": "🔀 둘 다", "callback_data": f"both:{candidate_id}"},
+                {"text": "❌ 넘김", "callback_data": f"reject:{candidate_id}"},
+            ],
         ]
     }
     resp = requests.post(

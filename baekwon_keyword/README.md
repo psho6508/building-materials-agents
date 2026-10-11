@@ -18,28 +18,39 @@
    - Claude가 백원철물건재 고객의 실제 생활 상황(수전 고장, 전등 깜박임, 누수, 동파,
      철물점 이용 등)과 자연스럽게 연결되는 주제만 엄격하게 선별 — 사고/재난, 정치,
      연예인 이름이 포함된 키워드는 연결고리가 있어 보여도 항상 제외
-   - 회차당 최대 2건까지만 후보 카드로 발송 (📝 블로그 발행 / 🎬 영상 제작 / ❌ 거절
-     버튼). 적합한 주제가 없으면 후보 카드는 보내지 않습니다.
+   - 회차당 최대 2건까지만 후보 카드로 발송 (📝 글 발행 / 🎬 숏폼 제작 / 🔀 둘 다 /
+     ❌ 넘김 버튼). 적합한 주제가 없으면 후보 카드는 보내지 않습니다.
    - 관련성 필터를 통과한 키워드는 승인 여부와 무관하게 `keyword_storage/{YYYY-MM-DD}.json`에
      일별로 누적 저장됩니다 (하루 4회 수집분이 같은 날짜 파일에 쌓임).
-2. **승인 처리** (`check_approvals.py`, 10분 간격 폴링)
-   - 버튼 클릭을 감지해 블로그 초안(2000~3000자, 네이버 SEO 구조) 또는 영상 대본
-     (30~60초 숏폼)을 생성
-   - `drafts/blog/` 또는 `drafts/video/`에 커밋하고, 완성된 GitHub 파일 링크를
-     텔레그램으로 회신
-   - ⚠️ 네이버에는 공식 글쓰기 API가, 유튜브 업로드에는 OAuth 인증이 필요해 **실제
-     발행/업로드는 자동화하지 않습니다.** 초안을 확인하고 직접 올려주세요.
+2. **승인 처리** (`check_approvals.py`, 10분 간격 폴링) — 버튼 클릭을 감지해 상태를
+   `pending → done/rejected/error`로 바꾸므로 같은 버튼을 여러 번 눌러도 중복 처리되지 않음
+   - **📝 글 발행**: 기존 발행 글(n8n) 스타일을 그대로 복제해 블로그 원고를 생성하고,
+     구글 드라이브 `집수리 컨텐츠 원고(블로그, 티스토리)` 폴더에 구글 문서로 저장 →
+     저장 완료되면 텔레그램으로 링크 회신. 사진/영상은 `집수리 현장 사진 및 영상`
+     폴더에서 직접 골라 넣고, 티스토리에는 사람이 수동으로 붙여넣기 발행 (공식
+     글쓰기 API가 폐지되어 자동 발행 불가)
+   - **🎬 숏폼 제작**: 30~60초 대본을 생성해 `drafts/video/`에 커밋하고 GitHub 링크를
+     텔레그램으로 회신. 실제 영상 제작(OpenMontage)은 에이전트가 단계별로 사람 승인을
+     받으며 진행하는 구조라 무인 자동화가 불가능 — 대본 확인 후 별도로 제작/업로드
+   - **🔀 둘 다**: 위 두 가지를 순서대로 실행하고 결과를 한 메시지로 회신
 
 ## 최초 설정 (1회)
 
-GitHub 저장소 Settings → Secrets and variables → Actions 에 아래 3개를 등록하세요.
+GitHub 저장소 Settings → Secrets and variables → Actions 에 아래 4개를 등록하세요.
 토큰은 민감정보이므로 직접 등록해주세요 (아래 명령을 터미널에서 실행하거나 웹 UI 사용):
 
 ```bash
 gh secret set ANTHROPIC_API_KEY
 gh secret set TELEGRAM_BOT_TOKEN
 gh secret set TELEGRAM_CHAT_ID
+gh secret set GOOGLE_SERVICE_ACCOUNT_JSON
 ```
+
+`GOOGLE_SERVICE_ACCOUNT_JSON`은 bank-ledger 프로젝트에서 쓰던 서비스 계정을 그대로
+재사용할 수 있습니다 (같은 JSON 키 내용을 이 저장소 시크릿으로도 등록). 단, 그
+서비스 계정 이메일(JSON의 `client_email` 값)을 구글 드라이브의
+`집수리 컨텐츠 원고(블로그, 티스토리)` 폴더에 **편집자로 공유**해줘야 저장이 됩니다.
+해당 구글 프로젝트에서 Drive API가 활성화돼 있어야 합니다.
 
 설정 후 `baekwon-keyword-collect.yml`을 Actions 탭에서 수동 실행(workflow_dispatch)해
 텔레그램 카드가 오는지 확인하세요. 이후 자동 스케줄대로 동작합니다.
@@ -58,7 +69,8 @@ python collect_and_notify.py
 
 - `sources.py` — 4개 소스 스크레이퍼
 - `relevance.py` — Claude 기반 관련성 필터링
-- `content_draft.py` — 블로그/영상 대본 초안 생성
+- `content_draft.py` — 블로그 원고/영상 대본 생성 (블로그는 n8n 발행 글 예시를 few-shot으로 사용)
+- `gdrive.py` — 블로그 원고를 구글 드라이브에 구글 문서로 저장
 - `telegram_api.py` — 텔레그램 발송/수신
 - `state.py` — 상태 저장(`state/pending_candidates.json`, `state/telegram_offset.json`)
 - `keyword_storage.py` — 관련 키워드 일별 누적 저장 (`keyword_storage/{날짜}.json`)
