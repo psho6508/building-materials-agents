@@ -36,21 +36,28 @@
 
 ## 최초 설정 (1회)
 
-GitHub 저장소 Settings → Secrets and variables → Actions 에 아래 4개를 등록하세요.
+GitHub 저장소 Settings → Secrets and variables → Actions 에 아래를 등록하세요.
 토큰은 민감정보이므로 직접 등록해주세요 (아래 명령을 터미널에서 실행하거나 웹 UI 사용):
 
 ```bash
 gh secret set ANTHROPIC_API_KEY
 gh secret set TELEGRAM_BOT_TOKEN
 gh secret set TELEGRAM_CHAT_ID
-gh secret set GOOGLE_SERVICE_ACCOUNT_JSON
+gh secret set APPS_SCRIPT_URL
+gh secret set APPS_SCRIPT_SECRET
 ```
 
-`GOOGLE_SERVICE_ACCOUNT_JSON`은 bank-ledger 프로젝트에서 쓰던 서비스 계정을 그대로
-재사용할 수 있습니다 (같은 JSON 키 내용을 이 저장소 시크릿으로도 등록). 단, 그
-서비스 계정 이메일(JSON의 `client_email` 값)을 구글 드라이브의
-`집수리 컨텐츠 원고(블로그, 티스토리)` 폴더에 **편집자로 공유**해줘야 저장이 됩니다.
-해당 구글 프로젝트에서 Drive API가 활성화돼 있어야 합니다.
+`APPS_SCRIPT_URL` / `APPS_SCRIPT_SECRET`은 블로그 원고를 구글 드라이브에 저장하기
+위한 구글 Apps Script 웹앱 설정입니다 (서비스 계정은 개인 Gmail 드라이브에서
+저장용량 0GB 문제로 못 씁니다 — 자세한 설명은 `apps_script/Code.gs` 상단 주석):
+
+1. [script.google.com](https://script.google.com) → 새 프로젝트 →
+   `apps_script/Code.gs` 내용 붙여넣기
+2. 프로젝트 설정(톱니바퀴) → 스크립트 속성 → `SHARED_SECRET` 추가, 값은
+   `APPS_SCRIPT_SECRET`과 동일하게 (코드에 직접 적지 않음 — 저장소가 공개라서)
+3. 배포 → 새 배포 → 유형: 웹 앱 → 실행 대상: 나 → 액세스 권한: 모든 사용자 → 배포
+   (첫 배포 시 권한 승인 화면 → 본인 계정으로 승인)
+4. 배포된 웹앱 URL을 `APPS_SCRIPT_URL`로 등록
 
 설정 후 `baekwon-keyword-collect.yml`을 Actions 탭에서 수동 실행(workflow_dispatch)해
 텔레그램 카드가 오는지 확인하세요. 이후 자동 스케줄대로 동작합니다.
@@ -70,7 +77,8 @@ python collect_and_notify.py
 - `sources.py` — 4개 소스 스크레이퍼
 - `relevance.py` — Claude 기반 관련성 필터링
 - `content_draft.py` — 블로그 원고/영상 대본 생성 (블로그는 n8n 발행 글 예시를 few-shot으로 사용)
-- `gdrive.py` — 블로그 원고를 구글 드라이브에 구글 문서로 저장
+- `gdrive.py` — 블로그 원고를 구글 드라이브에 구글 문서로 저장 (Apps Script 웹앱 경유)
+- `apps_script/Code.gs` — 위 저장을 처리하는 구글 Apps Script 웹앱 소스 (script.google.com에 붙여넣어 배포)
 - `telegram_api.py` — 텔레그램 발송/수신
 - `state.py` — 상태 저장(`state/pending_candidates.json`, `state/telegram_offset.json`)
 - `keyword_storage.py` — 관련 키워드 일별 누적 저장 (`keyword_storage/{날짜}.json`)

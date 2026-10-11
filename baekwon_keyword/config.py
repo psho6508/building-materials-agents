@@ -61,8 +61,11 @@ MAX_CANDIDATES_PER_RUN = 2
 GITHUB_REPOSITORY = os.environ.get("GITHUB_REPOSITORY", "psho6508/building-materials-agents")
 GITHUB_BRANCH = os.environ.get("GITHUB_BRANCH", "master")
 
-# 구글 드라이브 (블로그 원고 저장용 — bank-ledger와 동일한 서비스 계정 재사용 가능)
-GOOGLE_SERVICE_ACCOUNT_JSON = os.environ.get("GOOGLE_SERVICE_ACCOUNT_JSON", "")
+# 구글 드라이브 (블로그 원고 저장용) — 서비스 계정은 개인 Gmail 드라이브에서
+# 저장용량 0GB 문제로 쓸 수 없어, 본인 계정으로 실행되는 Apps Script 웹앱을 거친다.
+# 설정 방법: apps_script/Code.gs
+APPS_SCRIPT_URL = os.environ.get("APPS_SCRIPT_URL", "")
+APPS_SCRIPT_SECRET = os.environ.get("APPS_SCRIPT_SECRET", "")
 # "집수리 컨텐츠 원고(블로그, 티스토리)" 폴더 ID
 GDRIVE_MANUSCRIPT_FOLDER_ID = os.environ.get(
     "GDRIVE_MANUSCRIPT_FOLDER_ID", "1WdxxjBA60WIp-xpZTFFMui6EYorCLXaO"
