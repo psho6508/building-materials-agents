@@ -93,9 +93,12 @@
       "reason": "수동 테스트용으로 강제 생성된 후보입니다.",
       "angle": "버튼 동작(글 발행/숏폼 제작/둘 다/넘김) 확인용.",
       "suggested_action": "both",
-      "status": "pending",
+      "status": "done",
       "message_id": 19,
-      "created_at": "2026-10-11T18:09:51.245295+09:00"
+      "created_at": "2026-10-11T18:09:51.245295+09:00",
+      "video_script_url": "https://github.com/psho6508/building-materials-agents/blob/master/baekwon_keyword/drafts/video/2026-10-11-b8d84206f0.md",
+      "video_message_id": 20,
+      "video_status": "script_ready"
     }
   }
 }
