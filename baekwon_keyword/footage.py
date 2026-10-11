@@ -25,11 +25,14 @@ def _pick_best_folder(topic: str, folders: list[dict]) -> dict | None:
     client = Anthropic(api_key=ANTHROPIC_API_KEY)
     message = client.messages.create(
         model=ANTHROPIC_MODEL,
-        max_tokens=10,
+        max_tokens=50,
         messages=[{"role": "user", "content": prompt}],
     )
     text = "".join(b.text for b in message.content if hasattr(b, "text")).strip()
-    print(f"[현장자료매칭] 폴더 {len(folders)}개, Claude 응답: {text!r}")
+    print(
+        f"[현장자료매칭] 폴더 {len(folders)}개, stop_reason={message.stop_reason}, "
+        f"content={message.content!r}, 응답텍스트={text!r}"
+    )
     digits = "".join(ch for ch in text if ch.isdigit())
     if not digits:
         return None
