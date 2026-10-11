@@ -18,6 +18,7 @@
 // - "save_manuscript" (기본값, 생략 가능): title/text/folderId → 구글 문서로 저장, {url}
 // - "list_footage_folders": folderId → 그 폴더 바로 아래 하위 폴더 이름/링크 목록, {folders:[{id,name,url}]}
 // - "list_folder_files": folderId → 그 폴더 안 파일(이미지/영상) 이름/링크/타입 목록, {files:[{name,url,mimeType}]}
+// - "download_file": fileId → 파일 내용을 base64로, {name,mimeType,base64}  (대용량 파일은 느릴 수 있음)
 
 function doPost(e) {
   var SHARED_SECRET = PropertiesService.getScriptProperties().getProperty("SHARED_SECRET");
@@ -31,10 +32,21 @@ function doPost(e) {
     var action = data.action || "save_manuscript";
     if (action === "list_footage_folders") return _json(listFootageFolders(data.folderId));
     if (action === "list_folder_files") return _json(listFolderFiles(data.folderId));
+    if (action === "download_file") return _json(downloadFile(data.fileId));
     return _json(saveManuscript(data.title, data.text, data.folderId));
   } catch (err) {
     return _json({ error: String(err) });
   }
+}
+
+function downloadFile(fileId) {
+  var file = DriveApp.getFileById(fileId);
+  var blob = file.getBlob();
+  return {
+    name: file.getName(),
+    mimeType: blob.getContentType(),
+    base64: Utilities.base64Encode(blob.getBytes()),
+  };
 }
 
 function _json(obj) {
