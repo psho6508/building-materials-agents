@@ -22,17 +22,16 @@ def _pick_best_folder(topic: str, folders: list[dict]) -> dict | None:
         "폴더가 있으면 그 번호만 답하세요. 비슷해 보여도 억지로 끼워맞추는 수준이면 0을 "
         f"답하세요.\n주제: {topic}\n\n숫자 하나만 답하세요 (설명 없이)."
     )
+    # claude-sonnet-5는 기본적으로 내부 추론(thinking)에 토큰을 먼저 쓰므로,
+    # max_tokens가 작으면(10~50) 추론만 하다 잘려서 실제 답(숫자)이 안 나온다.
     client = Anthropic(api_key=ANTHROPIC_API_KEY)
     message = client.messages.create(
         model=ANTHROPIC_MODEL,
-        max_tokens=50,
+        max_tokens=1024,
         messages=[{"role": "user", "content": prompt}],
     )
     text = "".join(b.text for b in message.content if hasattr(b, "text")).strip()
-    print(
-        f"[현장자료매칭] 폴더 {len(folders)}개, stop_reason={message.stop_reason}, "
-        f"content={message.content!r}, 응답텍스트={text!r}"
-    )
+    print(f"[현장자료매칭] 폴더 {len(folders)}개, stop_reason={message.stop_reason}, 응답텍스트={text!r}")
     digits = "".join(ch for ch in text if ch.isdigit())
     if not digits:
         return None
