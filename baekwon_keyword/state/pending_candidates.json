@@ -24,6 +24,18 @@
       "message_id": 10,
       "created_at": "2026-10-11T10:12:30.524347+09:00",
       "blog_result_url": "https://docs.google.com/open?id=1E9BWYWNI0F9IGLBF9fWLa32n1HG1j9TZUz6ggedyUiE"
+    },
+    "743dd368b0": {
+      "id": "743dd368b0",
+      "topic": "곰팡이 핀 베란다 창틀 실리콘 교체",
+      "source": "manual_test",
+      "rank": 0,
+      "reason": "수동 테스트용으로 강제 생성된 후보입니다.",
+      "angle": "버튼 동작(글 발행/숏폼 제작/둘 다/넘김) 확인용.",
+      "suggested_action": "both",
+      "status": "pending",
+      "message_id": 11,
+      "created_at": "2026-10-11T17:45:35.716550+09:00"
     }
   }
 }
