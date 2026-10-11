@@ -1,5 +1,5 @@
 // 구글 Apps Script 웹앱 — GitHub Actions가 서비스 계정 대신 이 웹앱을 통해
-// 본인(psho6508) 계정 권한으로 구글 드라이브에 문서를 저장하게 한다.
+// 본인(psho6508) 계정 권한으로 구글 드라이브를 읽고/쓰게 한다.
 // (서비스 계정은 저장용량이 0GB라 개인 Gmail 드라이브에 새 파일을 못 만든다 —
 //  이 웹앱은 배포한 사람의 권한으로 실행되므로 그 문제가 없다.)
 //
@@ -11,31 +11,68 @@
 // 3. 배포 → 새 배포 → 유형: 웹 앱 → 실행 대상: 나 → 액세스 권한: 모든 사용자 → 배포
 //    처음 배포 시 권한 승인 화면이 뜨면 본인 계정으로 승인
 //    (고급 → 안전하지 않음으로 이동, 눌러도 됨 — 본인이 만든 스크립트이므로 안전)
+// 코드를 수정한 뒤에는 "배포 → 배포 관리 → 기존 배포 수정 → 새 버전"으로
+// 업데이트해야 URL이 바뀌지 않는다.
+//
+// 액션 (data.action):
+// - "save_manuscript" (기본값, 생략 가능): title/text/folderId → 구글 문서로 저장, {url}
+// - "list_footage_folders": folderId → 그 폴더 바로 아래 하위 폴더 이름/링크 목록, {folders:[{id,name,url}]}
+// - "list_folder_files": folderId → 그 폴더 안 파일(이미지/영상) 이름/링크/타입 목록, {files:[{name,url,mimeType}]}
 
 function doPost(e) {
   var SHARED_SECRET = PropertiesService.getScriptProperties().getProperty("SHARED_SECRET");
 
   var data = JSON.parse(e.postData.contents);
   if (data.secret !== SHARED_SECRET) {
-    return ContentService.createTextOutput(JSON.stringify({ error: "unauthorized" }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return _json({ error: "unauthorized" });
   }
 
   try {
-    var folder = DriveApp.getFolderById(data.folderId);
-    var doc = DocumentApp.create(data.title);
-    var body = doc.getBody();
-    body.setText(data.text);
-    doc.saveAndClose();
-
-    var file = DriveApp.getFileById(doc.getId());
-    folder.addFile(file);
-    DriveApp.getRootFolder().removeFile(file);
-
-    return ContentService.createTextOutput(JSON.stringify({ url: doc.getUrl() }))
-      .setMimeType(ContentService.MimeType.JSON);
+    var action = data.action || "save_manuscript";
+    if (action === "list_footage_folders") return _json(listFootageFolders(data.folderId));
+    if (action === "list_folder_files") return _json(listFolderFiles(data.folderId));
+    return _json(saveManuscript(data.title, data.text, data.folderId));
   } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ error: String(err) }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return _json({ error: String(err) });
   }
+}
+
+function _json(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
+}
+
+function saveManuscript(title, text, folderId) {
+  var folder = DriveApp.getFolderById(folderId);
+  var doc = DocumentApp.create(title);
+  var body = doc.getBody();
+  body.setText(text);
+  doc.saveAndClose();
+
+  var file = DriveApp.getFileById(doc.getId());
+  folder.addFile(file);
+  DriveApp.getRootFolder().removeFile(file);
+
+  return { url: doc.getUrl() };
+}
+
+function listFootageFolders(folderId) {
+  var parent = DriveApp.getFolderById(folderId);
+  var it = parent.getFolders();
+  var folders = [];
+  while (it.hasNext()) {
+    var f = it.next();
+    folders.push({ id: f.getId(), name: f.getName(), url: f.getUrl() });
+  }
+  return { folders: folders };
+}
+
+function listFolderFiles(folderId) {
+  var folder = DriveApp.getFolderById(folderId);
+  var it = folder.getFiles();
+  var files = [];
+  while (it.hasNext()) {
+    var f = it.next();
+    files.push({ name: f.getName(), url: f.getUrl(), mimeType: f.getMimeType() });
+  }
+  return { files: files };
 }

@@ -16,6 +16,7 @@ GitHub Actions 워크플로우(baekwon-approval-check.yml)에서 10분 간격으
 from datetime import datetime, timezone, timedelta
 
 import content_draft
+import footage
 import gdrive
 import state
 import telegram_api
@@ -40,12 +41,17 @@ def _make_blog(candidate: dict, date_str: str) -> str:
     doc_title = f"{date_str}_{candidate['topic'][:40]}"
     url = gdrive.upload_manuscript(doc_title, draft_text)
     candidate["blog_result_url"] = url
+
+    match = footage.find_matching_footage(candidate["topic"])
+    if match:
+        candidate["footage_folder_url"] = match["folder_url"]
+        candidate["footage_folder_name"] = match["folder_name"]
+
     return (
         f"✅ 블로그 원고 완성 → 구글 드라이브 저장됨\n\n"
         f"📄 원고 보기: {url}\n\n"
-        "※ 사진/영상은 '집수리 현장 사진 및 영상' 폴더에서 골라 직접 넣고, "
-        "티스토리에 붙여넣기 후 발행해주세요 (티스토리는 공식 글쓰기 API가 없어 "
-        "자동 발행은 지원하지 않습니다)."
+        "※ 티스토리에는 사람이 수동으로 붙여넣기 후 발행해주세요 (공식 글쓰기 API가 "
+        "폐지되어 자동 발행은 지원하지 않습니다)." + footage.format_footage_note(match)
     )
 
 
@@ -59,11 +65,17 @@ def _start_video_review(candidate: dict, date_str: str, cid: str):
     url = _video_draft_url(filename)
     candidate["video_script_url"] = url
 
+    match = footage.find_matching_footage(candidate["topic"])
+    if match:
+        candidate["footage_folder_url"] = match["folder_url"]
+        candidate["footage_folder_name"] = match["folder_name"]
+
     stripped = draft_text.strip()
     excerpt = stripped[:800] + ("..." if len(stripped) > 800 else "")
     text = (
         f"🎬 영상 대본 완성 — 승인하면 제작 대기열에 올라갑니다\n\n"
         f"{candidate['topic']}\n\n{excerpt}\n\n📄 전체 대본: {url}"
+        + footage.format_footage_note(match)
     )
     candidate["video_message_id"] = telegram_api.send_video_review_card(cid, text)
     candidate["video_status"] = "script_ready"

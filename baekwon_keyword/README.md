@@ -24,11 +24,14 @@
      일별로 누적 저장됩니다 (하루 4회 수집분이 같은 날짜 파일에 쌓임).
 2. **승인 처리** (`check_approvals.py`, 10분 간격 폴링) — 버튼 클릭을 감지해 상태를
    `pending → done/rejected/error`로 바꾸므로 같은 버튼을 여러 번 눌러도 중복 처리되지 않음
+   - 원고/대본을 만들 때마다 `footage.py`가 구글 드라이브 `집수리 현장 사진 및 영상`
+     폴더의 작업건별 하위 폴더 이름을 주제와 비교해 같은 현장인지 Claude로 판단함.
+     일치하면 결과 메시지에 그 폴더(사진/영상 링크)를 붙이고, 없으면 그냥 넘어감
+     (억지로 끼워맞추지 않음)
    - **📝 글 발행**: 기존 발행 글(n8n) 스타일을 그대로 복제해 블로그 원고를 생성하고,
      구글 드라이브 `집수리 컨텐츠 원고(블로그, 티스토리)` 폴더에 구글 문서로 저장 →
-     저장 완료되면 텔레그램으로 링크 회신. 사진/영상은 `집수리 현장 사진 및 영상`
-     폴더에서 직접 골라 넣고, 티스토리에는 사람이 수동으로 붙여넣기 발행 (공식
-     글쓰기 API가 폐지되어 자동 발행 불가)
+     저장 완료되면 텔레그램으로 링크 회신 (매칭된 현장 자료가 있으면 같이 안내).
+     티스토리에는 사람이 수동으로 붙여넣기 발행 (공식 글쓰기 API가 폐지되어 자동 발행 불가)
    - **🎬 숏폼 제작**: 30~60초 대본을 생성해 `drafts/video/`에 커밋하고, 대본 내용과
      함께 **별도 승인 카드**(🎬 영상 만들기 / ❌ 취소)를 새 메시지로 발송
      (`video_status: script_ready`). "영상 만들기"를 누르면 `video_status: approved`로
@@ -52,9 +55,12 @@ gh secret set APPS_SCRIPT_URL
 gh secret set APPS_SCRIPT_SECRET
 ```
 
-`APPS_SCRIPT_URL` / `APPS_SCRIPT_SECRET`은 블로그 원고를 구글 드라이브에 저장하기
-위한 구글 Apps Script 웹앱 설정입니다 (서비스 계정은 개인 Gmail 드라이브에서
-저장용량 0GB 문제로 못 씁니다 — 자세한 설명은 `apps_script/Code.gs` 상단 주석):
+`APPS_SCRIPT_URL` / `APPS_SCRIPT_SECRET`은 블로그 원고 저장 + 현장 사진/영상 매칭에
+쓰는 구글 Apps Script 웹앱 설정입니다 (서비스 계정은 개인 Gmail 드라이브에서 저장용량
+0GB 문제로 못 씁니다 — 자세한 설명은 `apps_script/Code.gs` 상단 주석).
+`Code.gs`를 수정했다면(예: 현장 자료 조회 기능 추가) 기존 배포를 **새 버전으로
+업데이트**해야 합니다 (배포 → 배포 관리 → 연필 아이콘 → 새 버전 → 배포. URL은 그대로
+유지됨, 새 배포를 만들면 URL이 바뀌니 주의):
 
 1. [script.google.com](https://script.google.com) → 새 프로젝트 →
    `apps_script/Code.gs` 내용 붙여넣기
@@ -82,8 +88,9 @@ python collect_and_notify.py
 - `sources.py` — 4개 소스 스크레이퍼
 - `relevance.py` — Claude 기반 관련성 필터링
 - `content_draft.py` — 블로그 원고/영상 대본 생성 (블로그는 n8n 발행 글 예시를 few-shot으로 사용)
-- `gdrive.py` — 블로그 원고를 구글 드라이브에 구글 문서로 저장 (Apps Script 웹앱 경유)
-- `apps_script/Code.gs` — 위 저장을 처리하는 구글 Apps Script 웹앱 소스 (script.google.com에 붙여넣어 배포)
+- `gdrive.py` — 구글 드라이브 읽기/쓰기 공통 클라이언트 (Apps Script 웹앱 경유)
+- `footage.py` — 주제와 일치하는 현장 사진/영상 폴더를 찾아 결과에 붙이는 매칭 프로세스
+- `apps_script/Code.gs` — 위 둘을 처리하는 구글 Apps Script 웹앱 소스 (script.google.com에 붙여넣어 배포)
 - `telegram_api.py` — 텔레그램 발송/수신
 - `state.py` — 상태 저장(`state/pending_candidates.json`, `state/telegram_offset.json`)
 - `keyword_storage.py` — 관련 키워드 일별 누적 저장 (`keyword_storage/{날짜}.json`)

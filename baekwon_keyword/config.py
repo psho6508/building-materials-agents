@@ -70,3 +70,7 @@ APPS_SCRIPT_SECRET = os.environ.get("APPS_SCRIPT_SECRET", "")
 GDRIVE_MANUSCRIPT_FOLDER_ID = os.environ.get(
     "GDRIVE_MANUSCRIPT_FOLDER_ID", "1WdxxjBA60WIp-xpZTFFMui6EYorCLXaO"
 )
+# "집수리 현장 사진 및 영상" 폴더 ID — 작업건별 하위 폴더에 실제 사진/영상이 들어있음
+GDRIVE_FOOTAGE_FOLDER_ID = os.environ.get(
+    "GDRIVE_FOOTAGE_FOLDER_ID", "1FTo3Mg18Z5gNPJPxDZxBb5W-T513tfG8"
+)
