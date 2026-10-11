@@ -4,7 +4,12 @@ on:
   schedule:
     # UTC 22,3,8,12 = KST 07:00 / 12:00 / 17:00 / 21:00. 예약 실행은 몇 분~10여 분 늦게 시작될 수 있습니다.
     - cron: "0 22,3,8,12 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      test_candidate_topic:
+        description: "비워두면 평소대로 수집. 값을 넣으면 그 주제로 테스트 카드 1건만 강제 발송 (버튼 동작 확인용)"
+        required: false
+        default: ""
 
 permissions:
   contents: write
@@ -29,6 +34,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TEST_CANDIDATE_TOPIC: ${{ github.event.inputs.test_candidate_topic }}
         run: python collect_and_notify.py
       - name: 상태 변경사항 커밋
         run: |

@@ -3,6 +3,8 @@
 GitHub Actions 워크플로우(baekwon-keyword-collect.yml)에서 호출된다.
 """
 
+import hashlib
+import os
 from datetime import datetime, timezone, timedelta
 
 import keyword_storage
@@ -55,8 +57,53 @@ def build_card_text(candidate: dict) -> str:
     )
 
 
+def _send_candidates(candidates: list[dict], now: datetime) -> int:
+    """후보 카드를 발송하고 pending 상태에 기록한다. 발송 건수를 반환한다."""
+    pending = state.load_pending()
+    existing_ids = set(pending.get("candidates", {}).keys())
+
+    sent = 0
+    for c in candidates:
+        if c["id"] in existing_ids:
+            # 이미 대기 중이거나 처리된 후보는 중복 발송하지 않음
+            continue
+        text = build_card_text(c)
+        try:
+            message_id = telegram_api.send_candidate_card(c["id"], text)
+        except Exception as e:
+            print(f"[경고] 텔레그램 발송 실패 ({c['topic']}): {e}")
+            continue
+        c["status"] = "pending"
+        c["message_id"] = message_id
+        c["created_at"] = now.isoformat()
+        pending.setdefault("candidates", {})[c["id"]] = c
+        sent += 1
+
+    state.save_pending(pending)
+    return sent
+
+
 def main():
     now = datetime.now(KST)
+
+    # 테스트용: 실제 트렌드를 기다리지 않고 버튼 승인 흐름만 바로 확인하고 싶을 때.
+    test_topic = os.environ.get("TEST_CANDIDATE_TOPIC", "").strip()
+    if test_topic:
+        print(f"[테스트 모드] 강제 후보 카드 발송: {test_topic}")
+        cid = hashlib.md5(f"test:{test_topic}".encode("utf-8")).hexdigest()[:10]
+        test_candidate = {
+            "id": cid,
+            "topic": test_topic,
+            "source": "manual_test",
+            "rank": 0,
+            "reason": "수동 테스트용으로 강제 생성된 후보입니다.",
+            "angle": "버튼 동작(글 발행/숏폼 제작/둘 다/넘김) 확인용.",
+            "suggested_action": "both",
+        }
+        sent = _send_candidates([test_candidate], now)
+        print(f"테스트 카드 {sent}건 발송 완료")
+        return
+
     print(f"[{now.isoformat()}] 키워드 수집 시작")
 
     raw_items = sources.collect_all()
@@ -87,27 +134,7 @@ def main():
         print("적합한 주제가 없어 후보 카드를 보내지 않습니다.")
         return
 
-    pending = state.load_pending()
-    existing_ids = set(pending.get("candidates", {}).keys())
-
-    sent = 0
-    for c in candidates:
-        if c["id"] in existing_ids:
-            # 이미 대기 중이거나 처리된 후보는 중복 발송하지 않음
-            continue
-        text = build_card_text(c)
-        try:
-            message_id = telegram_api.send_candidate_card(c["id"], text)
-        except Exception as e:
-            print(f"[경고] 텔레그램 발송 실패 ({c['topic']}): {e}")
-            continue
-        c["status"] = "pending"
-        c["message_id"] = message_id
-        c["created_at"] = now.isoformat()
-        pending.setdefault("candidates", {})[c["id"]] = c
-        sent += 1
-
-    state.save_pending(pending)
+    sent = _send_candidates(candidates, now)
     print(f"후보 카드 {sent}건 발송 완료")
 
 
