@@ -29,6 +29,7 @@ def _pick_best_folder(topic: str, folders: list[dict]) -> dict | None:
         messages=[{"role": "user", "content": prompt}],
     )
     text = "".join(b.text for b in message.content if hasattr(b, "text")).strip()
+    print(f"[현장자료매칭] 폴더 {len(folders)}개, Claude 응답: {text!r}")
     digits = "".join(ch for ch in text if ch.isdigit())
     if not digits:
         return None
@@ -44,7 +45,9 @@ def find_matching_footage(topic: str) -> dict | None:
         return None
     try:
         listing = call_apps_script("list_footage_folders", folderId=GDRIVE_FOOTAGE_FOLDER_ID)
-        folder = _pick_best_folder(topic, listing.get("folders", []))
+        folders = listing.get("folders", [])
+        print(f"[현장자료매칭] 조회된 폴더: {[f['name'] for f in folders]!r}")
+        folder = _pick_best_folder(topic, folders)
         if not folder:
             return None
         files_data = call_apps_script("list_folder_files", folderId=folder["id"])
