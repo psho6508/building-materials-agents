@@ -116,6 +116,18 @@
       "footage_folder_name": "사당 댄스연습실 문수리",
       "video_message_id": 22,
       "video_status": "approved"
+    },
+    "cc7019d04b": {
+      "id": "cc7019d04b",
+      "topic": "재건축",
+      "source": "google_trends_kr",
+      "rank": 7,
+      "reason": "재건축이 활발해지면 철거 후 신축 과정에서 철강재, 단열재, 전기/배관 자재 등 건축자재 수요가 늘어나는 생활 밀착 이슈입니다.",
+      "angle": "재건축 현장에서 자주 쓰이는 필수 자재(철강재·단열재·배관재) 체크리스트와 구매 팁을 소개하는 콘텐츠",
+      "suggested_action": "blog",
+      "status": "pending",
+      "message_id": 27,
+      "created_at": "2026-10-12T09:47:35.925521+09:00"
     }
   }
 }
