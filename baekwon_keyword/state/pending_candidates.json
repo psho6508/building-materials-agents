@@ -152,6 +152,30 @@
       "status": "pending",
       "message_id": 49,
       "created_at": "2026-10-18T16:29:14.918732+09:00"
+    },
+    "819a423982": {
+      "id": "819a423982",
+      "topic": "차량 고립되고 가로수 쓰러져… 집중호우에 수도권 도로 곳곳 침수",
+      "source": "naver_news_rank",
+      "rank": 11,
+      "reason": "집중호우로 인한 침수는 누수·방수 문제와 직결되어 집수리 수요가 급증하는 상황입니다.",
+      "angle": "장마철 침수·누수 피해 예방을 위한 방수 자재 및 배수 점검 셀프 체크리스트 콘텐츠",
+      "suggested_action": "blog",
+      "status": "pending",
+      "message_id": 51,
+      "created_at": "2026-10-18T21:13:38.143398+09:00"
+    },
+    "b961864aef": {
+      "id": "b961864aef",
+      "topic": "풍속 200km/h '슈퍼태풍' 참피‥일제히 '대만행 예측' 초비상",
+      "source": "naver_news_rank",
+      "rank": 14,
+      "reason": "강풍을 동반한 태풍 예보는 창문·지붕 보강, 누수 방지 등 사전 집수리 자재 수요로 이어집니다.",
+      "angle": "태풍 대비 집 안팎 점검 가이드와 필요한 철물·방수 자재 추천 콘텐츠",
+      "suggested_action": "both",
+      "status": "pending",
+      "message_id": 52,
+      "created_at": "2026-10-18T21:13:38.143398+09:00"
     }
   }
 }
