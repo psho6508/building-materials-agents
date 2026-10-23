@@ -248,6 +248,18 @@
       "status": "pending",
       "message_id": 70,
       "created_at": "2026-10-23T01:10:59.104504+09:00"
+    },
+    "571f91f3db": {
+      "id": "571f91f3db",
+      "topic": "초강력 태풍 ‘참피’ 진로 틀었다…한반도 영향은?",
+      "source": "naver_news_rank",
+      "rank": 4,
+      "reason": "태풍 영향권에 들면 누수, 창문 파손, 배수 문제 등 집수리 수요가 급증하는 생활 밀착 이슈이다.",
+      "angle": "태풍 대비 집 안팎 점검 체크리스트(창문 보강, 배수구 점검, 방수 자재 추천)로 B2C·B2B 고객에게 실질적인 대비법 콘텐츠 제작",
+      "suggested_action": "both",
+      "status": "pending",
+      "message_id": 72,
+      "created_at": "2026-10-23T09:13:52.416857+09:00"
     }
   }
 }
