@@ -296,6 +296,18 @@
       "status": "pending",
       "message_id": 78,
       "created_at": "2026-10-24T09:06:40.583932+09:00"
+    },
+    "59585e9a80": {
+      "id": "59585e9a80",
+      "topic": "태풍 '참피' 최대 100㎜ 비 내린다…위기경보 '주의' 상향",
+      "source": "naver_news_rank",
+      "rank": 16,
+      "reason": "태풍과 집중호우는 누수, 방수, 배수 문제 등 집수리 수요와 직접 연결되는 생활 이슈입니다.",
+      "angle": "태풍 전후 누수·방수 점검 체크리스트와 필요한 방수 자재·공구 추천 콘텐츠",
+      "suggested_action": "both",
+      "status": "pending",
+      "message_id": 81,
+      "created_at": "2026-10-24T21:17:53.494065+09:00"
     }
   }
 }
