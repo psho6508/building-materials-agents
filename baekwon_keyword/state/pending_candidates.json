@@ -344,6 +344,18 @@
       "status": "pending",
       "message_id": 102,
       "created_at": "2026-10-31T02:20:51.394112+09:00"
+    },
+    "4a022b6019": {
+      "id": "4a022b6019",
+      "topic": "미세먼지",
+      "source": "google_trends_kr",
+      "rank": 4,
+      "reason": "미세먼지가 심해지면 외부 공기 유입을 막기 위해 창문 틈새 방풍/밀폐 작업에 대한 관심이 높아진다",
+      "angle": "미세먼지 차단을 위한 창문 틈새막이, 방풍비닐, 실리콘 코킹 등 셀프 집수리 자재 추천 콘텐츠",
+      "suggested_action": "blog",
+      "status": "pending",
+      "message_id": 104,
+      "created_at": "2026-10-31T10:09:50.507248+09:00"
     }
   }
 }
