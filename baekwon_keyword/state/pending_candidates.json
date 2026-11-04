@@ -380,6 +380,18 @@
       "status": "pending",
       "message_id": 114,
       "created_at": "2026-11-03T05:56:34.393769+09:00"
+    },
+    "dea1a09945": {
+      "id": "dea1a09945",
+      "topic": "레미콘",
+      "source": "google_trends_kr",
+      "rank": 8,
+      "reason": "레미콘은 건축 현장에서 사용되는 핵심 건축자재로 건설사 구매담당자와 시공업체 고객의 관심사와 직접 연결됨",
+      "angle": "레미콘 가격 동향 및 타설 시 주의사항, 겨울철 한파 대비 양생 관리법 등 현장 실무 정보 콘텐츠",
+      "suggested_action": "blog",
+      "status": "pending",
+      "message_id": 119,
+      "created_at": "2026-11-04T19:03:07.265199+09:00"
     }
   }
 }
