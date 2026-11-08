@@ -440,6 +440,18 @@
       "status": "pending",
       "message_id": 134,
       "created_at": "2026-11-08T09:57:09.050634+09:00"
+    },
+    "abfa05507f": {
+      "id": "abfa05507f",
+      "topic": "중부 밤까지 비·눈…월요일 남부·제주 비에 초겨울 추위",
+      "source": "naver_news_rank",
+      "rank": 8,
+      "reason": "초겨울 추위와 비 소식은 보일러 점검, 동파 방지, 단열재 수요 등 계절 집수리 이슈와 직접 연결됩니다.",
+      "angle": "한파 대비 수도관 동파 방지 및 보일러 점검 체크리스트, 관련 자재(단열재·보온재) 구매 가이드 콘텐츠",
+      "suggested_action": "both",
+      "status": "pending",
+      "message_id": 136,
+      "created_at": "2026-11-08T18:39:10.388928+09:00"
     }
   }
 }
