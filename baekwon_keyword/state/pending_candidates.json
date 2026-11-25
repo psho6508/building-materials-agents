@@ -548,6 +548,30 @@
       "status": "pending",
       "message_id": 178,
       "created_at": "2026-11-21T04:19:53.443831+09:00"
+    },
+    "b0c9cd5eb4": {
+      "id": "b0c9cd5eb4",
+      "topic": "제강",
+      "source": "google_trends_kr",
+      "rank": 6,
+      "reason": "제강업 동향은 철강재 가격에 직접 영향을 미쳐 건축 자재 구매 담당자의 관심사와 연결된다",
+      "angle": "최근 제강업계 동향에 따른 철강재(앵글, 파이프 등) 가격 변동 전망과 자재 구매 타이밍 가이드",
+      "suggested_action": "blog",
+      "status": "pending",
+      "message_id": 190,
+      "created_at": "2026-11-25T13:39:03.915514+09:00"
+    },
+    "08b9e46a76": {
+      "id": "08b9e46a76",
+      "topic": "블랙프라이데이 해외직구 물품",
+      "source": "nate_issue",
+      "rank": 5,
+      "reason": "블랙프라이데이 시즌 해외직구로 공구를 구매하려는 DIY 소비자들의 고민과 맞닿아 있다",
+      "angle": "해외직구 공구 vs 동네 철물점 구매 비교, A/S와 품질 체크포인트 안내",
+      "suggested_action": "blog",
+      "status": "pending",
+      "message_id": 191,
+      "created_at": "2026-11-25T13:39:03.915514+09:00"
     }
   }
 }
